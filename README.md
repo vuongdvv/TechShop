@@ -2,7 +2,6 @@
 
 Website thương mại điện tử chuyên bán laptop chính hãng, được xây dựng bằng PHP thuần với kiến trúc tách biệt Front-end / Back-end.
 
-
 ## 🛠️ Công nghệ sử dụng
 
 - **Back-end:** PHP 8.x
@@ -92,7 +91,7 @@ lapshop/
 
    ```bash
    cd C:\xampp\htdocs
-   git clone https://github.com/vuongdvv/TechShop.git lapshop
+   git clone https://github.com/vuongdvv/TechShop.git
    ```
 
 2. **Tạo database**
