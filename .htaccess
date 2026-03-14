@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteBase /lapshop/
+
+# Root URL → home page
+RewriteRule ^$ front-end/home.php [L]
+
+# Skip requests to front-end/ directly (avoid double rewrite)
+RewriteRule ^front-end/ - [L]
+
+# Skip existing root-level files and directories (back-end, assets, js, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite to front-end/ if the file exists there
+RewriteCond %{DOCUMENT_ROOT}/lapshop/front-end/$1 -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/lapshop/front-end/$1 -d
+RewriteRule ^(.+)$ front-end/$1 [L]
