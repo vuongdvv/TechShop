@@ -2,11 +2,6 @@
 
 Website thương mại điện tử chuyên bán laptop chính hãng, được xây dựng bằng PHP thuần với kiến trúc tách biệt Front-end / Back-end.
 
-## 📸 Demo
-
-| Trang chủ                                       | Chi tiết sản phẩm                 |
-| ----------------------------------------------- | --------------------------------- |
-| Hiển thị sản phẩm nổi bật, lọc theo thương hiệu | Thông tin chi tiết, cấu hình, giá |
 
 ## 🛠️ Công nghệ sử dụng
 
