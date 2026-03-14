@@ -108,6 +108,7 @@ lapshop/
 3. **Cấu hình**
    - File `config/database.php`: cập nhật thông tin kết nối nếu cần
    - File `config/config.php`: cập nhật `BASE_URL` nếu đổi tên thư mục
+   - File `config/vnpay.php `: thông tin vnpaysandbox
 
 4. **Bật Apache & MySQL** trong XAMPP Control Panel
 
