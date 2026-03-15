@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="<?= FRONT_URL ?>/assets/css/footer.css">
 <footer class="footer">
     <div class="footer-container container">
-
         <!-- Cột 1: Logo + mô tả -->
         <div class="footer-col">
             <div class="footer-logo">
@@ -47,6 +46,4 @@
         </div>
 
     </div>
-
-
 </footer>

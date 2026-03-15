@@ -22,9 +22,7 @@ require_once dirname(__DIR__) . "/includes/functions.php";
 </style>
 
 <body>
-
     <?php include dirname(__DIR__) . "/includes/header.php"; ?>
-
     <div class="container">
         <h2>🎉 Đặt hàng thành công!</h2>
         <p>Cảm ơn bạn đã mua sắm tại <strong><?= SITE_NAME ?></strong></p>
@@ -32,7 +30,6 @@ require_once dirname(__DIR__) . "/includes/functions.php";
             Tiếp tục mua sắm
         </a>
     </div>
-
 </body>
 
 </html>

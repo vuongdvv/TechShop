@@ -69,12 +69,10 @@ require_once dirname(__DIR__) . "/includes/header.php";
         const toast = document.getElementById('toast');
         if (toast) {
             toast.remove();
-
         }
         if (window.location.search.includes('success')) {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
-
     }, 3000);
 </Script>
 

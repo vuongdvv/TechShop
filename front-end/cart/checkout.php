@@ -1,12 +1,10 @@
 <?php
 session_start();
-
 require_once dirname(__DIR__, 2) . "/config/config.php";
 require_once dirname(__DIR__, 2) . "/config/database.php";
 require_once dirname(__DIR__) . "/includes/functions.php";
 require_once dirname(__DIR__, 2) . "/back-end/cart/checkout.php";
 require_once dirname(__DIR__) . "/includes/header.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -21,10 +19,7 @@ require_once dirname(__DIR__) . "/includes/header.php";
 </head>
 
 <body>
-
-
     <main>
-
         <div class="container">
             <?php if (!empty($_SESSION['error'])): ?>
                 <div class="toast-error">
@@ -32,39 +27,28 @@ require_once dirname(__DIR__) . "/includes/header.php";
                 </div>
                 <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
-
             <h2 class="page-title">💳 Thanh toán</h2>
-
-
             <form action="<?= BASE_URL ?>/back-end/cart/process_checkout.php" method="post" id="checkoutForm">
-
                 <div class="checkout-wrapper">
-
                     <!-- ================= LEFT: DANH SÁCH SẢN PHẨM ================= -->
                     <div class="checkout-left">
-
                         <table class="cart-table">
                             <thead>
                                 <tr>
                                     <td data-label="Sản phẩm">Sản Phẩm</td>
                                     <td data-label="Số lượng">Số lượng</td>
                                     <td data-label="Giá">Giá</td>
-
-
                                 </tr>
                             </thead>
-
                             <tbody>
                                 <?php foreach ($items as $item): ?>
                                     <?php
                                     $image = !empty($item['image_url'])
                                         ? FRONT_URL . "/assets/images/products/" . $item['image_url']
                                         : FRONT_URL . "/assets/images/products/no-image.png";
-
                                     $subTotal = $item['price'] * $item['quantity'];
                                     ?>
                                     <tr>
-
                                         <td class="cart-product">
                                             <a href="<?= FRONT_URL ?>/product/detail.php?slug=<?= urlencode($item['slug']) ?>"
                                                 class="cart-product-link">
@@ -75,22 +59,16 @@ require_once dirname(__DIR__) . "/includes/header.php";
                                         <td><?= $item['quantity'] ?></td>
 
                                         <td><?= formatPrice($subTotal) ?></td>
-
-
                                     </tr>
-
                                     <input type="hidden" name="cart_item_ids[]" value="<?= $item['cart_item_id'] ?>">
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                         <a href="<?= FRONT_URL ?>/cart/index.php" class="cart-continue-shopping">← Trở lại giỏ hàng</a>
                     </div>
-
                     <!-- ================= RIGHT: THÔNG TIN THANH TOÁN ================= -->
                     <div class="checkout-right">
-
                         <h3>Thông tin người nhận</h3>
-
                         <div class="form-group">
                             <label>Họ và tên</label>
                             <input type="text" name="customer_name"
@@ -140,17 +118,12 @@ require_once dirname(__DIR__) . "/includes/header.php";
                                 Xác nhận thanh toán
                             </button>
                         </div>
-
                     </div>
-
                 </div>
-
             </form>
-
         </div>
     </main>
     <?php include dirname(__DIR__) . "/includes/footer.php"; ?>
-
     <script>
         const totalEl = document.getElementById('totalPrice');
         totalEl.textContent = '<?= number_format($totalPrice, 0, ',', '.') ?>₫';

@@ -13,23 +13,15 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
     <meta charset="UTF-8">
     <title>Sản phẩm - <?= SITE_NAME ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
     <link rel="stylesheet" href="<?= FRONT_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= FRONT_URL ?>/assets/css/productlist.css">
-
 </head>
 
 <body>
-
-
     <main>
         <div class="container">
-
             <div class="brands">
                 <h2>Thương hiệu</h2>
                 <div class="brand-list">
@@ -54,9 +46,7 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <!-- ===== CATEGORY ===== -->
-
             <div class="categories">
                 <h2>Danh mục</h2>
                 <div class="category-list">
@@ -78,11 +68,9 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <h2 class="page-title">
                 Danh sách sản phẩm
             </h2>
-
             <div class="product-grid">
                 <?php if (empty($products)): ?>
                     <p>Không có sản phẩm nào.</p>
@@ -93,9 +81,7 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                             ? FRONT_URL . '/assets/images/products/' . $product['image_url']
                             : FRONT_URL . '/assets/images/products/no-image.png';
                         ?>
-
                         <div class="product-card">
-
                             <div class=" product-label">
                                 <div class="product-rating">
                                     <span class="star">★</span>
@@ -105,7 +91,6 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                                     <img src="<?= $imagePath ?>" alt="<?= e($product['name']) ?>">
                                 </a>
                             </div>
-
                             <div class="product-info">
                                 <div class="product-brand">
                                     <?= strtoupper(e($product['brand_name'])) ?>
@@ -114,7 +99,6 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                                 <h3 class="product-name">
                                     <?= e($product['name']) ?>
                                 </h3>
-
                                 <div class="product-tags">
                                     <?php if (!empty($product['cpu'])): ?>
                                         <span><?= e($product['cpu']) ?></span>
@@ -126,7 +110,6 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                                         <span><?= e($product['ssd']) ?></span>
                                     <?php endif; ?>
                                 </div>
-
                                 <div class="product-price-box">
                                     <div>
                                         <?php if (!empty($product['sale_price']) && $product['sale_price'] < $product['price']): ?>
@@ -151,7 +134,6 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                                         <?php endif; ?>
                                     </div>
                                 </div>
-
                                 <div class="product-actions">
                                     <a href="<?= BASE_URL ?>/back-end/cart/add.php?id=<?= $product['id'] ?>&redirect=list"
                                         class="cart-icon"> <i class="fa fa-cart-plus"></i>
@@ -159,13 +141,11 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
                                     <a href="<?= BASE_URL ?>/back-end/cart/add.php?id=<?= $product['id'] ?>&buy_now=1"
                                         class="btn btn-primary"> Mua ngay
                                     </a>
-
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-
             </div>
             <?php if ($totalProducts > count($products)): ?>
                 <div class="load-more-wrap">
@@ -188,8 +168,6 @@ require_once dirname(__DIR__, 2) . "/back-end/product/product-list.php";
     <?php include dirname(__DIR__) . "/includes/footer.php"; ?>
 
     <script src="<?= FRONT_URL ?>/js/listproduct.js"></script>
-
-
 </body>
 
 </html>

@@ -21,12 +21,9 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
 <body>
 
     <div class="admin-wrapper">
-        <!-- SIDEBAR -->
         <?php include dirname(__DIR__) . "/sidebar.php"; ?>
-        <!-- MAIN -->
         <div class="admin-container">
             <div class="admin-layout">
-                <!-- HEADER -->
                 <div class="page-header">
                     <div>
                         <h1>Quản lý sản phẩm</h1>
@@ -39,9 +36,7 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                         </a>
                     </div>
                 </div>
-                <!-- STATS -->
                 <div class="stats-grid">
-                    <!-- TỔNG SẢN PHẨM (CLICK = RESET FILTER) -->
                     <a href="product.php" class="stat-card-link <?= (!isset($_GET['low_stock']) && !isset($_GET['out_stock'])) ? 'active-card' : '' ?>">
                         <div class="stat-card">
                             <div class="stat-icon blue"><i class="fa fa-box"></i></div>
@@ -51,7 +46,6 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                             </div>
                         </div>
                     </a>
-                    <!-- SẮP HẾT HÀNG -->
                     <a href="?low_stock=1" class="stat-card-link <?= isset($_GET['low_stock']) ? 'active-card' : '' ?>">
                         <div class="stat-card">
                             <div class="stat-icon orange">
@@ -63,7 +57,6 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                             </div>
                         </div>
                     </a>
-                    <!-- HẾT HÀNG -->
                     <a href="?out_stock=1" class="stat-card-link <?= isset($_GET['out_stock']) ? 'active-card' : '' ?>">
                         <div class="stat-card">
                             <div class="stat-icon red">
@@ -76,16 +69,13 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                         </div>
                     </a>
                 </div>
-                <!-- TABLE -->
                 <div class="table-wrapper">
-
                     <form method="GET" class="table-filter">
                         <input type="text" name="keyword"
                             placeholder="Tìm kiếm laptop..." autocomplete="off"
                             value="<?= htmlspecialchars($keyword) ?>">
                         <button type="submit">Tìm kiếm</button>
                     </form>
-
                     <table class="admin-table">
                         <thead>
                             <tr>
@@ -99,14 +89,11 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php while ($row = $result->fetch_assoc()): ?>
-
                                 <?php
                                 $image = !empty($row['image_url'])
                                     ? FRONT_URL . "/assets/images/products/" . $row['image_url']
                                     : FRONT_URL . "/assets/images/products/no-image.png";
-
                                 if ($row['stock'] == 0) {
                                     $status = '<span class="badge badge-red">Hết hàng</span>';
                                 } elseif ($row['stock'] <= 5) {
@@ -115,10 +102,8 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                                     $status = '<span class="badge badge-green">Còn hàng (' . $row['stock'] . ')</span>';
                                 }
                                 ?>
-
                                 <tr>
                                     <td><img src="<?= $image ?>" class="product-img"></td>
-
                                     <td>
                                         <div class="product-name">
                                             <?= htmlspecialchars($row['name']) ?>
@@ -150,21 +135,17 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
                         </tbody>
                     </table>
 
-                    <!-- PAGINATION -->
                     <div class="pagination-wrapper">
 
                         <div class="pagination-info">
                             Hiển thị <?= $start ?>–<?= $end ?> trên <?= $totalRows ?> sản phẩm
                         </div>
-
                         <div class="pagination">
                             <?php
-                            // Loại bỏ 'page' parameter từ $_GET để tránh dupplicate
                             $queryParams = $_GET;
                             unset($queryParams['page']);
                             $queryString = http_build_query($queryParams);
                             ?>
-
                             <?php if ($page > 1): ?>
                                 <a href="?page=<?= $page - 1 ?><?= $queryString ? '&' . $queryString : '' ?>">&laquo;</a>
                             <?php endif; ?>
@@ -202,6 +183,22 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
         </div>
     </div>
 
+    <?php if (!empty($_SESSION['success'])): ?>
+        <div id="toast" class="toast toast-success">
+            <i class="fa fa-check-circle"></i>
+            <?= htmlspecialchars($_SESSION['success']) ?>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($_SESSION['error'])): ?>
+        <div id="toast" class="toast toast-error">
+            <i class="fa fa-times-circle"></i>
+            <?= htmlspecialchars($_SESSION['error']) ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <script>
         function openDeleteModal(id) {
             document.getElementById("deleteId").value = id;
@@ -210,6 +207,14 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/product.php";
 
         function closeDeleteModal() {
             document.getElementById("deleteModal").style.display = "none";
+        }
+
+        // Auto-remove toast after animation
+        const toast = document.getElementById("toast");
+        if (toast) {
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
         }
     </script>
 

@@ -21,14 +21,12 @@ require_once __DIR__ . "/includes/header.php";
 <body>
 
     <main>
-        <!-- ===== BANNER ===== -->
         <div class="home-banner">
             <div class="banner-content">
 
             </div>
         </div>
 
-        <!-- ===== BRAND LOGO ===== -->
         <div class="brands">
             <h2>Thương hiệu</h2>
             <div class="brand-list">
@@ -49,27 +47,6 @@ require_once __DIR__ . "/includes/header.php";
                 <?php endforeach; ?>
             </div>
         </div>
-
-        <!-- ===== CATEGORY ===== -->
-        <!-- <div class="categories">
-            <h2>Danh mục</h2>
-            <div class="category-list">
-                <?php foreach ($categories as $category): ?>
-                    <?php
-                    if ($brandFilter !== '') {
-                        $url = "?brand=" . $brandFilter . "&category=" . $category['slug'];
-                    } else {
-                        $url = "?category=" . $category['slug'];
-                    }
-                    ?>
-                    <a href="<?= $url ?>"
-                        class="category-item <?= ($categoryFilter === $category['slug']) ? 'active' : '' ?>">
-                        <span><?= e($category['name']) ?></span>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div> -->
-
 
         <div class="featured-products">
             <div class="section-header">

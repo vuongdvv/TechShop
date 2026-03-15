@@ -4,7 +4,6 @@ require_once dirname(__DIR__, 2) . "/config/config.php";
 require_once dirname(__DIR__, 2) . "/config/database.php";
 require_once dirname(__DIR__) . "/includes/functions.php";
 require_once dirname(__DIR__, 2) . "/back-end/auth/login.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +13,8 @@ require_once dirname(__DIR__, 2) . "/back-end/auth/login.php";
     <meta charset="UTF-8">
     <title>Đăng nhập - <?= SITE_NAME ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="<?= FRONT_URL ?>/assets/css/login.css">
 </head>
 

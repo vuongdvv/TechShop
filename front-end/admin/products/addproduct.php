@@ -77,11 +77,8 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
                                 </select>
                             </div>
                         </div>
-
-
                     </div>
 
-                    <!-- 3. Thông số kỹ thuật -->
                     <div class="card">
                         <h3>3. Thông số kỹ thuật</h3>
 
@@ -106,7 +103,6 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
                         </div>
                     </div>
 
-                    <!-- 4. Mô tả -->
                     <div class="card">
                         <h3>4. Mô tả sản phẩm</h3>
                         <textarea name="description" rows="6"
@@ -115,11 +111,8 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
 
                 </div>
 
-
-                <!-- RIGHT COLUMN -->
                 <div class="right-column">
 
-                    <!-- 2. Giá & Kho -->
                     <div class="card">
                         <h3>2. Giá & Kho hàng</h3>
 
@@ -131,9 +124,7 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
 
                         <label>Số lượng</label>
                         <input type="number" name="stock" min="0" value="">
-
                     </div>
-
 
                     <div class="card">
                         <h3>5. Hình ảnh</h3>
@@ -151,8 +142,6 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
                                     style="width:150px; border:1px solid #ccc; padding:5px;">
                                 <span id="removeImage" class="removeImage"> &times; </span>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="card">
@@ -161,11 +150,10 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
                             <label>Đánh giá ★ (rating)</label>
                             <div class="rating-input">
                                 <input type="number" name="rating" min="0" max="5" step="0.1" placeholder="VD: 4.5">
-
                             </div>
                         </div>
                     </div>
-                    <!-- Trạng thái -->
+
                     <div class="card status-card">
                         <h3>Trạng thái</h3>
 
@@ -193,7 +181,5 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/addproduct.php";
     </script>
     <script src="<?= FRONT_URL ?>/js/admin_addproduct.js"></script>
 </body>
-
-
 
 </html>

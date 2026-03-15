@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ");
 
         $stmt->bind_param(
-            "ssiisddiid",
+            "ssiisddidi",
             $name,
             $slug,
             $brand_id,
@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $price,
             $sale_price,
             $stock,
-            $status,
-            $rating
+            $rating,
+            $status
         );
 
         $stmt->execute();

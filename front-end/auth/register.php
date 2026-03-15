@@ -4,7 +4,6 @@ require_once dirname(__DIR__, 2) . "/config/config.php";
 require_once dirname(__DIR__, 2) . "/config/database.php";
 require_once dirname(__DIR__) . "/includes/functions.php";
 require_once dirname(__DIR__, 2) . "/back-end/auth/register.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +13,6 @@ require_once dirname(__DIR__, 2) . "/back-end/auth/register.php";
     <meta charset="UTF-8">
     <title>Đăng ký - <?= SITE_NAME ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="<?= FRONT_URL ?>/assets/css/register.css">
 </head>
 

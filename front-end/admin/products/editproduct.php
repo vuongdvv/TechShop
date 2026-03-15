@@ -17,17 +17,12 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/editproduct.php";
 
 <body>
     <div class="admin-wrapper">
-
-        <!-- ================= SIDEBAR ================= -->
         <?php include_once dirname(__DIR__) . "/sidebar.php"; ?>
-
         <div class="admin-container">
-
             <div class="breadcrumbs">
                 <a href="<?= FRONT_URL ?>/admin/products/product.php">Quản lý sản phẩm</a> >
                 <span>Chỉnh sửa sản phẩm</span>
             </div>
-
 
             <div class="top-bar">
                 <h1>Chỉnh sửa sản phẩm</h1>
@@ -156,11 +151,8 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/editproduct.php";
                                         style="<?= empty($image['image_url']) ? 'display:none;' : '' ?>">
                                         &times;
                                     </span>
-
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div class="card">
@@ -197,10 +189,8 @@ require_once dirname(__DIR__, 3) . "/back-end/admin/products/editproduct.php";
                                 <span>Ẩn sản phẩm</span>
                             </label>
                         </div>
-
                     </div>
             </form>
-
         </div>
     </div>
 

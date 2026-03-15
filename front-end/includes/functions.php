@@ -20,7 +20,6 @@ function requireLogin()
         exit;
     }
 }
-
 /*Đăng xuất*/
 function logout()
 {
@@ -28,7 +27,6 @@ function logout()
     header("Location: " . FRONT_URL . "/home.php");
     exit;
 }
-
 /**
  * Kiểm tra quyền admin (cho trang admin)
  * Nếu admin là user được set role='admin', kiểm tra lại role trong DB

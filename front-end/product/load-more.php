@@ -15,8 +15,6 @@ function buildWhere($conn)
     $conditions = ["p.status = 1"];
     $params     = [];
     $types      = "";
-
-
     $add = function ($condition, $value = null, $type = "") use (&$conditions, &$params, &$types) {
         $conditions[] = $condition;
         if ($value !== null) {
@@ -24,7 +22,6 @@ function buildWhere($conn)
             $types   .= $type;
         }
     };
-
     if (!empty($_GET['category'])) {
         $category = getCategoryBySlug($conn, $_GET['category']);
 
@@ -77,10 +74,8 @@ function buildWhere($conn)
 
     return [$where, $params, $types];
 }
-
 /* ===== APPLY WHERE ===== */
 list($where, $params, $types) = buildWhere($conn);
-
 /* ===== MAIN QUERY ===== */
 $sql = "
     SELECT
@@ -110,7 +105,6 @@ $sql = "
 $paramsWithLimit = [...$params, $limit, $offset];
 $typesWithLimit  = $types . "ii";
 
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param($typesWithLimit, ...$paramsWithLimit);
 $stmt->execute();
@@ -123,7 +117,6 @@ foreach ($products as $product):
         : FRONT_URL . '/assets/images/products/no-image.png';
 ?>
     <div class="product-card">
-
         <div class="product-label">
             <div class="product-rating">
                 <span class="star">★</span>

@@ -5,7 +5,6 @@ require_once dirname(__DIR__, 2) . "/config/config.php";
 require_once dirname(__DIR__, 2) . "/config/database.php";
 require_once dirname(__DIR__) . "/includes/functions.php";
 require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +25,13 @@ require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
 <body>
     <main>
         <div class="admin-wrapper">
-
             <!-- SIDEBAR -->
             <div class="sidebar">
                 <h2>💻 Tech Admin</h2>
 
                 <a href="dashboard.php"
-                    class="<?= (strpos($currentPage, 'dashboard.php') !== false && strpos($currentPage, 'orders') === false && strpos($currentPage, 'products') === false) ? 'active' : '' ?>">
+                    class="<?= (strpos($currentPage, 'dashboard.php') !== false && strpos($currentPage, 'orders') === false
+                                && strpos($currentPage, 'products') === false) ? 'active' : '' ?>">
                     <i class="fa fa-chart-line"></i> Trang chủ
                 </a>
 
@@ -59,17 +58,13 @@ require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
                     <i class="fa fa-sign-out-alt"></i> Đăng xuất
                 </a>
             </div>
-
             <!-- MAIN CONTENT -->
             <div class="main">
-
                 <div class="topbar">
                     <h1>Xin chào, <?= htmlspecialchars($_SESSION['admin_name']) ?></h1>
 
                 </div>
-
                 <div class="dashboard">
-
                     <div class="card" onclick="window.location.href='orders/index.php'">
                         <i class="fa fa-receipt"></i>
                         <h3>Tổng đơn hàng</h3>
@@ -93,11 +88,8 @@ require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
                         <h3>Khách hàng</h3>
                         <div class="value"><?= $totalUsers ?></div>
                     </div>
-
                 </div>
                 <div class="dashboard-extended">
-
-                    <!-- Revenue Overview -->
                     <div class="card-box revenue-card">
                         <div class="card-header">
                             <div>
@@ -105,20 +97,14 @@ require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
                                 <p>Doanh thu 7 ngày gần nhất</p>
                             </div>
                         </div>
-
                         <canvas id="revenueChart" height="100"></canvas>
                     </div>
-
-
-                    <!-- Top Selling -->
                     <div class="card-box top-card">
                         <h3>Sản phẩm bán chạy nhất</h3>
                         <p class="sub">Laptop phổ biến nhất trong tuần</p>
-
                         <?php while ($row = $topProducts->fetch_assoc()): ?>
                             <div class="top-item">
                                 <div class="product-info">
-
                                     <div class="product-image">
                                         <?php if (!empty($row['image_url'])): ?>
                                             <img src="<?= FRONT_URL ?>/assets/images/products/<?= htmlspecialchars($row['image_url']) ?>" alt="">
@@ -126,41 +112,28 @@ require_once dirname(__DIR__, 2) . "/back-end/admin/dashboard.php";
                                             <img src="<?= FRONT_URL ?>/assets/images/products/no-image.png" alt="">
                                         <?php endif; ?>
                                     </div>
-
                                     <div>
                                         <strong><?= htmlspecialchars($row['name']) ?></strong>
                                         <div class="category">
                                             <?= htmlspecialchars($row['category_name'] ?? 'Chưa phân loại') ?>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="sales">
                                     <?= $row['total_sold'] ?>
                                     <span>Bán ra</span>
                                 </div>
                             </div>
-
                         <?php endwhile; ?>
-
-
                     </div>
-
                 </div>
-
-
-                <!-- Recent Orders -->
                 <div class="card-box recent-card">
-
                     <div class="card-header">
                         <div>
                             <h3>Đơn đặt hàng gần đây</h3>
                             <p>Danh sách khách hàng mua hàng mới nhất</p>
                         </div>
-
                     </div>
-
                     <table class="modern-table">
                         <thead>
                             <tr>
