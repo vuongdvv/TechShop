@@ -182,7 +182,7 @@ try {
     if ($paymentMethod === 'vnpay') {
         header("Location: " . BASE_URL . "/back-end/payment/create_vnpay_payment.php?order_id=" . $orderId);
     } else {
-        header("Location: success.php?order_id=" . $orderId);
+        header("Location: " . FRONT_URL . "/cart/success.php?order_id=" . $orderId);
     }
     exit;
 } catch (Exception $e) {

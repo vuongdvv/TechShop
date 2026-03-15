@@ -96,7 +96,7 @@ require_once dirname(__DIR__, 2) . "/back-end/orders/index.php";
         function cancelOrder(orderId) {
             if (!confirm("Bạn có chắc muốn hủy đơn này không?")) return;
 
-            fetch("<?= BASE_URL ?>/back-end/cart/cancel_order.php", {
+            fetch("<?= BASE_URL ?>/back-end/orders/cancel_order.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
