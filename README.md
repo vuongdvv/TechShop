@@ -118,7 +118,4 @@ lapshop/
 - `htmlspecialchars()` chống XSS
 - Phân quyền Admin / User
 
-## 👨‍💻 Tác giả
 
-- **Dương Văn Vương**
-- GitHub: [@vuongdvv](https://github.com/vuongdvv)
