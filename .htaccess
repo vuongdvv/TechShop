@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /TechShop/
+
+    # Legacy pages may output relative asset paths like /cart/assets/... or /cart/js/...
+    RewriteRule ^.+/assets/(.*)$ public/assets/$1 [L,QSA,NC]
+    RewriteRule ^.+/js/(.*)$ public/js/$1 [L,QSA,NC]
+
+    # Serve static files from public/ when they exist
+    RewriteCond %{REQUEST_URI} !^/TechShop/public/
+    RewriteCond %{DOCUMENT_ROOT}/TechShop/public/$1 -f
+    RewriteRule ^(.+)$ public/$1 [L,QSA]
+
+    # Forward all other requests to Laravel front controller
+    RewriteCond %{REQUEST_URI} !^/TechShop/public/
+    RewriteRule ^ public/index.php [L,QSA]
+
+</IfModule>

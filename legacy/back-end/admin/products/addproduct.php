@@ -1,0 +1,164 @@
+<?php
+
+require_once dirname(__DIR__, 3) . "/config/config.php";
+require_once dirname(__DIR__, 3) . "/config/database.php";
+require_once dirname(__DIR__, 3) . "/front-end/includes/functions.php";
+require_once dirname(__DIR__, 2) . "/api_client.php";
+
+requireAdminAccess($conn);
+
+$errors = [];
+$currentPath = $_SERVER['PHP_SELF'];
+
+
+
+function createSlug($string)
+{
+    $string = strtolower(trim($string));
+    $string = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+    $string = preg_replace('/[^a-z0-9-]/', '-', $string);
+    $string = preg_replace('/-+/', '-', $string);
+    return trim($string, '-');
+}
+
+$brandResult = $conn->query("SELECT * FROM brands");
+
+$categoryResult = $conn->query("SELECT * FROM categories");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $slug = createSlug($name);
+    $brand_id = $_POST["brand_id"];
+    $category_id = $_POST["category_id"];
+    $description = $_POST["description"];
+    $price = $_POST["price"];
+    $sale_price = $_POST["sale_price"];
+    $stock = $_POST["stock"];
+    $status = $_POST["status"];
+
+    $cpu = $_POST["cpu"];
+    $ram = $_POST["ram"];
+    $ssd = $_POST["ssd"];
+    $gpu = $_POST["gpu"];
+    $screen = $_POST["screen"];
+    $pin = $_POST["pin"];
+    $he_dieu_hanh = $_POST["he_dieu_hanh"];
+    $kich_thuoc = $_POST["kich_thuoc"];
+
+    if (defined('LARAVEL_API_ENABLED') && LARAVEL_API_ENABLED) {
+        $jwtCookie = defined('JWT_COOKIE_NAME') ? JWT_COOKIE_NAME : 'techshop_token';
+        $token = $_COOKIE[$jwtCookie] ?? '';
+        $cookieHeader = $token !== '' ? ($jwtCookie . '=' . $token) : '';
+
+        $payload = [
+            'name' => $name,
+            'brand_id' => $brand_id,
+            'category_id' => $category_id,
+            'description' => $description,
+            'price' => $price,
+            'sale_price' => $sale_price,
+            'stock' => $stock,
+            'status' => $status,
+            'cpu' => $cpu,
+            'ram' => $ram,
+            'ssd' => $ssd,
+            'gpu' => $gpu,
+            'screen' => $screen,
+            'pin' => $pin,
+            'he_dieu_hanh' => $he_dieu_hanh,
+            'kich_thuoc' => $kich_thuoc,
+        ];
+
+        if (!empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $payload['image'] = new CURLFile(
+                $_FILES['image']['tmp_name'],
+                $_FILES['image']['type'] ?? 'application/octet-stream',
+                $_FILES['image']['name'] ?? 'image'
+            );
+        }
+
+        $apiResult = callLaravelApi('POST', '/admin/products', $payload, $cookieHeader, true);
+        if ($apiResult['ok']) {
+            header("Location: addproduct.php?success=1");
+            exit();
+        }
+
+        $errors[] = $apiResult['json']['message'] ?? 'Có lỗi xảy ra, vui lòng thử lại';
+    }
+
+    if (empty($name)) {
+        $errors[] = "Tên sản phẩm không được để trống";
+    }
+
+    if (empty($errors)) {
+
+        $stmt = $conn->prepare("
+            INSERT INTO products
+            (name, slug, brand_id, category_id, description, price, sale_price, stock, status, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+
+        $stmt->bind_param(
+            "ssiisddii",
+            $name,
+            $slug,
+            $brand_id,
+            $category_id,
+            $description,
+            $price,
+            $sale_price,
+            $stock,
+            $status
+        );
+
+        $stmt->execute();
+
+        $product_id = $stmt->insert_id;
+
+        // upload ảnh
+        if (!empty($_FILES["image"]["name"])) {
+
+            $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+            $imageName = $slug . "-" . time() . "." . $extension;
+            $target = dirname(__DIR__, 3) . "/front-end/assets/images/products/" . $imageName;
+
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target)) {
+
+                $imgStmt = $conn->prepare("
+            INSERT INTO product_images (product_id, image_url, is_main)
+            VALUES (?, ?, 1)
+        ");
+
+                $imgStmt->bind_param("is", $product_id, $imageName);
+                $imgStmt->execute();
+            } else {
+                die("Upload ảnh thất bại");
+            }
+        }
+
+        // insert variant
+        $variantStmt = $conn->prepare("
+            INSERT INTO product_variants
+            (product_id, cpu, ram, ssd, gpu, screen, pin, he_dieu_hanh, kich_thuoc)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        $variantStmt->bind_param(
+            "issssssss",
+            $product_id,
+            $cpu,
+            $ram,
+            $ssd,
+            $gpu,
+            $screen,
+            $pin,
+            $he_dieu_hanh,
+            $kich_thuoc
+        );
+
+        $variantStmt->execute();
+
+        header("Location: addproduct.php?success=1");
+        exit();
+    }
+}
